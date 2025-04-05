@@ -478,6 +478,16 @@
                 transition: height 0.3s ease-in-out;
             }
         }
+
+        /* Add background color to About section */
+        #about {
+            background-color: #272726;
+        }
+
+        /* Add background color to Podcast section */
+        #podcast {
+             background-color: #272726;
+        }
     </style>
 </head>
 <body class="relative">
@@ -563,74 +573,6 @@
         </div>
     </section>
     
-    <!-- Podcast Section (Formerly Gallery) -->
-    <section id="podcast" class="py-28 px-8 bg-black bg-opacity-70 relative overflow-hidden">
-        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1531913764164-f85c52e6e654?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80'); opacity: 0.05;"></div>
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Talking Beats Podcast</h2>
-            <div class="gallery-grid">
-                <!-- Episode 143 -->
-                <div class="artwork-card fade-in">
-                    <img src="images/podcast/strauss+ca.png" alt="Episode 143: Antony, Cleopatra, Octavian and the War that Made the Roman Empire with Barry Strauss" class="w-full h-80 object-cover">
-                    <div class="artwork-info">
-                        <h3 class="text-xl font-bold text-white">Episode 143: Antony, Cleopatra, Octavian and the War that Made the Roman Empire</h3>
-                        <p class="text-accent">with Barry Strauss</p>
-                    </div>
-                </div>
-
-                <!-- Episode 142 -->
-                <div class="artwork-card fade-in delay-1">
-                     <img src="images/podcast/john+reid.png" alt="Episode 142: Saving Big Forests to Save the Planet" class="w-full h-80 object-cover">
-                    <div class="artwork-info">
-                        <h3 class="text-xl font-bold text-white">Episode 142: Saving Big Forests to Save the Planet</h3>
-                        <p class="text-accent">with John Reid</p> <!-- Assuming john+reid.png is for this -->
-                    </div>
-                </div>
-
-                <!-- Episode 141 -->
-                <div class="artwork-card fade-in delay-2">
-                    <img src="images/podcast/jorja+ca.png" alt="Episode 141: The Lifelong Passion for Music with Jorja Fleezanis" class="w-full h-80 object-cover">
-                    <div class="artwork-info">
-                        <h3 class="text-xl font-bold text-white">Episode 141: The Lifelong Passion for Music</h3>
-                        <p class="text-accent">with Jorja Fleezanis</p>
-                    </div>
-                </div>
-
-                <!-- Episode 140 -->
-                <div class="artwork-card fade-in delay-3">
-                    <img src="images/podcast/gergen+ca.png" alt="Episode 140: The Making of Great Leaders with David Gergen" class="w-full h-80 object-cover">
-                    <div class="artwork-info">
-                        <h3 class="text-xl font-bold text-white">Episode 140: The Making of Great Leaders</h3>
-                        <p class="text-accent">with David Gergen</p>
-                    </div>
-                </div>
-
-                <!-- Episode 139 -->
-                <div class="artwork-card fade-in delay-4">
-                    <img src="images/podcast/milman+ca.png" alt="Episode 139: The Disappearance of Insects with Oliver Milman" class="w-full h-80 object-cover">
-                    <div class="artwork-info">
-                        <h3 class="text-xl font-bold text-white">Episode 139: The Disappearance of Insects</h3>
-                        <p class="text-accent">with Oliver Milman</p>
-                    </div>
-                </div>
-
-                <!-- Episode 138 -->
-                <div class="artwork-card fade-in delay-5"> <!-- Added delay-5 -->
-                    <img src="images/podcast/brotman+ca.png" alt="Episode 138: The Enduring Power of the First Amendment with Stuart Brotman" class="w-full h-80 object-cover">
-                    <div class="artwork-info">
-                        <h3 class="text-xl font-bold text-white">Episode 138: The Enduring Power of the First Amendment</h3>
-                        <p class="text-accent">with Stuart Brotman</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Removed the "View Full Portfolio" button as no link was provided -->
-            <!-- <div class="text-center mt-16 fade-in delay-4">
-                <a href="#" class="golden-btn inline-block px-8 py-4 text-white uppercase tracking-wider">View Full Portfolio</a>
-            </div> -->
-        </div>
-    </section>
-
     <!-- Publications Section -->
     <section id="publications" class="py-28 px-8 bg-black bg-opacity-50">
         <div class="container mx-auto max-w-7xl">
@@ -837,6 +779,74 @@
                 </div> <!-- End Publication Cards -->
 
             </div> <!-- End Main Grid -->
+        </div>
+    </section>
+
+    <!-- Podcast Section (Formerly Gallery) -->
+    <section id="podcast" class="py-28 px-8 bg-black bg-opacity-70 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1531913764164-f85c52e6e654?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80'); opacity: 0.05;"></div>
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Talking Beats Podcast</h2>
+            <div class="gallery-grid">
+                <!-- Episode 143 -->
+                <div class="artwork-card fade-in">
+                    <img src="images/podcast/strauss+ca.png" alt="Episode 143: Antony, Cleopatra, Octavian and the War that Made the Roman Empire with Barry Strauss" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 143: Antony, Cleopatra, Octavian and the War that Made the Roman Empire</h3>
+                        <p class="text-accent">with Barry Strauss</p>
+                    </div>
+                </div>
+
+                <!-- Episode 142 -->
+                <div class="artwork-card fade-in delay-1">
+                     <img src="images/podcast/john+reid.png" alt="Episode 142: Saving Big Forests to Save the Planet" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 142: Saving Big Forests to Save the Planet</h3>
+                        <p class="text-accent">with John Reid</p> <!-- Assuming john+reid.png is for this -->
+                    </div>
+                </div>
+
+                <!-- Episode 141 -->
+                <div class="artwork-card fade-in delay-2">
+                    <img src="images/podcast/jorja+ca.png" alt="Episode 141: The Lifelong Passion for Music with Jorja Fleezanis" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 141: The Lifelong Passion for Music</h3>
+                        <p class="text-accent">with Jorja Fleezanis</p>
+                    </div>
+                </div>
+
+                <!-- Episode 140 -->
+                <div class="artwork-card fade-in delay-3">
+                    <img src="images/podcast/gergen+ca.png" alt="Episode 140: The Making of Great Leaders with David Gergen" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 140: The Making of Great Leaders</h3>
+                        <p class="text-accent">with David Gergen</p>
+                    </div>
+                </div>
+
+                <!-- Episode 139 -->
+                <div class="artwork-card fade-in delay-4">
+                    <img src="images/podcast/milman+ca.png" alt="Episode 139: The Disappearance of Insects with Oliver Milman" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 139: The Disappearance of Insects</h3>
+                        <p class="text-accent">with Oliver Milman</p>
+                    </div>
+                </div>
+
+                <!-- Episode 138 -->
+                <div class="artwork-card fade-in delay-5"> <!-- Added delay-5 -->
+                    <img src="images/podcast/brotman+ca.png" alt="Episode 138: The Enduring Power of the First Amendment with Stuart Brotman" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 138: The Enduring Power of the First Amendment</h3>
+                        <p class="text-accent">with Stuart Brotman</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Removed the "View Full Portfolio" button as no link was provided -->
+            <!-- <div class="text-center mt-16 fade-in delay-4">
+                <a href="#" class="golden-btn inline-block px-8 py-4 text-white uppercase tracking-wider">View Full Portfolio</a>
+            </div> -->
         </div>
     </section>
     
