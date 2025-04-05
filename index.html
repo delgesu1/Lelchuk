@@ -468,13 +468,20 @@
 
         @media (max-width: 767px) {
             .hero-image {
-                background-position: 90% center;
+                background-position: 80% center;
                 background-attachment: scroll;
             }
             
             .cursor-dot,
             .cursor-outline {
                 display: none;
+            }
+
+            /* Make mobile nav transparent initially */
+            #main-nav:not(.nav-scrolled) {
+                background-color: transparent;
+                backdrop-filter: none;
+                box-shadow: none; /* Also remove shadow when transparent */
             }
         }
 
