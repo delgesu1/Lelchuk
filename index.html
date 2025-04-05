@@ -477,6 +477,18 @@
                 display: none;
             }
         }
+
+        /* Styles for shrunk mobile nav */
+        #main-nav.nav-shrunk {
+            padding-top: 0.5rem; /* py-2 */
+            padding-bottom: 0.5rem; /* py-2 */
+            transition: padding 0.3s ease-in-out;
+        }
+
+        #main-nav.nav-shrunk img {
+            height: 2.5rem; /* h-10 */
+            transition: height 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="relative">
@@ -1186,6 +1198,33 @@
                 }
             });
         }
+
+        // Mobile Nav Shrink on Scroll
+        const mainNavElement = document.getElementById('main-nav');
+        const logoImg = mainNavElement.querySelector('img');
+        const originalLogoSrc = 'images/LelchukLogo.png';
+        const smallLogoSrc = 'images/LelchukLogoSmall.png';
+        const scrollThreshold = 50; // Pixels scrolled before shrinking
+
+        function handleNavShrink() {
+            const isMobile = window.innerWidth < 768;
+            if (isMobile && window.scrollY > scrollThreshold) {
+                mainNavElement.classList.add('nav-shrunk');
+                if (logoImg.src !== smallLogoSrc) {
+                    logoImg.src = smallLogoSrc;
+                }
+            } else {
+                mainNavElement.classList.remove('nav-shrunk');
+                if (logoImg.src !== originalLogoSrc) {
+                    logoImg.src = originalLogoSrc;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', handleNavShrink);
+        window.addEventListener('resize', handleNavShrink); // Handle resize events too
+        // Initial check in case the page loads already scrolled or in mobile view
+        handleNavShrink();
     </script>
 </body>
 </html>
