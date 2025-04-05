@@ -465,6 +465,17 @@
         .read-more-btn:hover::after {
             transform: translateX(3px);
         }
+
+        @media (max-width: 767px) {
+            .hero-image {
+                background-position: 90% center;
+            }
+            
+            .cursor-dot,
+            .cursor-outline {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="relative">
@@ -515,7 +526,7 @@
             </h1>
             <p class="text-xl md:text-2xl mb-8 fade-in delay-1 uppercase tracking-widest text-accent">CELLIST</p>
             <div class="fade-in delay-2">
-                <a href="#podcast" class="golden-border-btn inline-block px-8 py-3 uppercase tracking-wider">Listen to the Podcast</a>
+                <a href="#publications" class="golden-border-btn inline-block px-8 py-3 uppercase tracking-wider">Read Latest Articles</a>
             </div>
         </div>
         <div class="scroll-indicator fade-in delay-3"></div>
