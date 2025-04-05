@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Lelchuk | Cellist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:wght@500;700&display=swap');
+        
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #f0e6d2;
+            --accent: #c19a6b;
+            --accent-dark: #8c6e4a;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--primary);
+            color: var(--secondary);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.03em;
+        }
+        
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('images/wide.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .artwork-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.98);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artwork-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .artwork-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(193, 154, 107, 0.15);
+        }
+        
+        .artwork-card:hover::before {
+            opacity: 1;
+        }
+        
+        .artwork-card:hover .artwork-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .artwork-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            position: relative;
+            letter-spacing: 0.1em;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.1em;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 2px;
+            bottom: -10px;
+            left: 35%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            transition: width 0.4s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 60%;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        .artwork-modal {
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .artwork-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent);
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 999;
+            pointer-events: none;
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+        }
+        
+        .exhibition-item {
+            position: relative;
+            padding-left: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .exhibition-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5em;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .exhibition-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .exhibition-item:hover::before {
+            transform: scale(1.5);
+        }
+        
+        .floating-label {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: var(--primary);
+            padding: 0 10px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus + .floating-label,
+        .form-input:not(:placeholder-shown) + .floating-label {
+            transform: translateY(-20px);
+            font-size: 0.7rem;
+        }
+        
+        .form-input {
+            background: transparent;
+            border: 1px solid rgba(193, 154, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+        
+        .golden-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            transition: all 0.4s ease;
+        }
+        
+        .golden-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .golden-btn:hover::before {
+            left: 100%;
+        }
+        
+        .golden-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(193, 154, 107, 0.4);
+        }
+        
+        .golden-border-btn {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--accent);
+            transition: all 0.4s ease;
+        }
+        
+        .golden-border-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(193, 154, 107, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .golden-border-btn:hover::before {
+            left: 100%;
+        }
+        
+        .golden-border-btn:hover {
+            background-color: rgba(193, 154, 107, 0.1);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollAnimation 2s infinite;
+        }
+        
+        @keyframes scrollAnimation {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 25px; opacity: 0; }
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .artwork-modal-content {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .artwork-modal.active .artwork-modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px var(--accent);
+            color: transparent;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Publications Section Styles */
+        .publication-card {
+            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(193, 154, 107, 0.2);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-5px);
+            border-bottom-color: var(--accent);
+        }
+
+        .publication-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(193, 154, 107, 0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .publication-tag:hover {
+            background-color: rgba(193, 154, 107, 0.3);
+        }
+
+        .publication-image {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .publication-card:hover .publication-image {
+            transform: scale(1.03);
+        }
+
+        .publication-nav {
+            position: sticky;
+            top: 100px;
+        }
+
+        .publication-nav-link {
+            position: relative;
+            padding-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .publication-nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .publication-nav-link:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .publication-nav-link:hover::before {
+            transform: translateY(-50%) scale(1.5);
+        }
+
+        .publication-nav-link.active {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .publication-nav-link.active::before {
+            transform: translateY(-50%) scale(1.5);
+            background-color: var(--accent);
+        }
+
+        .publication-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+        }
+
+        .publication-content.active {
+            max-height: 1000px;
+        }
+
+        .read-more-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+        }
+
+        .read-more-btn::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23c19a6b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7' /%3E%3C/svg%3E");
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn:hover::after {
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed w-full z-50 bg-black bg-opacity-50 backdrop-blur-sm py-4 px-8 transition-all duration-500">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-wider" style="font-family: 'Playfair Display', serif; color: var(--accent);">DANIEL LELCHUK</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">About</a>
+                <a href="#podcast" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Podcast</a>
+                <a href="#publications" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Publications</a>
+                <a href="#Events" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Events</a>
+                <a href="#contact" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-xl text-accent">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-black bg-opacity-95 z-40 pt-24 px-8">
+        <div class="container mx-auto">
+            <div class="flex flex-col space-y-8 text-center">
+                <a href="#about" class="text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">About</a>
+                <a href="#podcast" class="text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Podcast</a>
+                <a href="#publications" class="text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Publications</a>
+                <a href="#Events" class="text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Events</a>
+                <a href="#contact" class="text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Contact</a>
+            </div>
+            <div class="absolute bottom-10 left-0 right-0 flex justify-center space-x-6">
+                <a href="#" class="text-xl hover:text-accent transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-xl hover:text-accent transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-xl hover:text-accent transition"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero-image min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="container mx-auto px-8 z-10 text-center">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 fade-in" style="font-family: 'Playfair Display', serif;">
+                <span class="text-stroke">DANIEL</span> <span class="text-accent">LELCHUK</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 fade-in delay-1 uppercase tracking-widest text-accent">CELLIST</p>
+            <div class="fade-in delay-2">
+                <a href="#podcast" class="golden-border-btn inline-block px-8 py-3 uppercase tracking-wider">Listen to the Podcast</a>
+            </div>
+        </div>
+        <div class="scroll-indicator fade-in delay-3"></div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-28 px-8 relative">
+        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0b800d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80'); opacity: 0.05;"></div>
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in"></h2>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="fade-in relative">
+                    <div class="absolute -inset-4 border border-accent opacity-20"></div>
+                    <img src="images/portrait.jpg" alt="Daniel Lelchuk" class="w-full h-auto relative z-10">
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 border-t border-r border-accent opacity-50"></div>
+                </div>
+                <div class="fade-in delay-1">
+                    <p class="mb-6 leading-relaxed text-lg">Daniel Lelchuk is renowned worldwide as both cellist and communicator. He has performed at numerous international festivals including those of Aspen, Baden-Baden, Hawaii, Colorado, Minnesota Lakes Area, Silicon Valley, and Salzburg. He has served as guest cellist of the Qatar Philharmonic, guest first cellist of the Orquesta Filarmónica de Jalisco, cellist of the Orquesta Sinfónica de Minería (Mexico City) and first cellist of the Royal Opera House Muscat (Oman).</p>
+                    <p class="mb-6 leading-relaxed text-lg">He served a decade-long successful tenure as Associate Principal Cellist of the Louisiana Philharmonic Orchestra and the New Orleans Opera Association, appointed by Music Director Carlos Miguel Prieto. At the invitation of Prince Nicolò Boncompagni Ludovisi, he presented a series of solo cello recitals at the famed Villa Aurora, Rome.</p>
+                    <blockquote class="border-l-4 border-accent pl-6 py-2 my-8 italic text-xl">
+                        "...a dazzling virtuoso" - The Washington Post
+                    </blockquote>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-accent hover:text-white transition text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-accent hover:text-white transition text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-accent hover:text-white transition text-2xl"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Podcast Section (Formerly Gallery) -->
+    <section id="podcast" class="py-28 px-8 bg-black bg-opacity-70 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1531913764164-f85c52e6e654?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80'); opacity: 0.05;"></div>
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Talking Beats Podcast</h2>
+            <div class="gallery-grid">
+                <!-- Episode 143 -->
+                <div class="artwork-card fade-in">
+                    <img src="images/podcast/strauss+ca.png" alt="Episode 143: Antony, Cleopatra, Octavian and the War that Made the Roman Empire with Barry Strauss" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 143: Antony, Cleopatra, Octavian and the War that Made the Roman Empire</h3>
+                        <p class="text-accent">with Barry Strauss</p>
+                    </div>
+                </div>
+
+                <!-- Episode 142 -->
+                <div class="artwork-card fade-in delay-1">
+                     <img src="images/podcast/john+reid.png" alt="Episode 142: Saving Big Forests to Save the Planet" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 142: Saving Big Forests to Save the Planet</h3>
+                        <p class="text-accent">with John Reid</p> <!-- Assuming john+reid.png is for this -->
+                    </div>
+                </div>
+
+                <!-- Episode 141 -->
+                <div class="artwork-card fade-in delay-2">
+                    <img src="images/podcast/jorja+ca.png" alt="Episode 141: The Lifelong Passion for Music with Jorja Fleezanis" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 141: The Lifelong Passion for Music</h3>
+                        <p class="text-accent">with Jorja Fleezanis</p>
+                    </div>
+                </div>
+
+                <!-- Episode 140 -->
+                <div class="artwork-card fade-in delay-3">
+                    <img src="images/podcast/gergen+ca.png" alt="Episode 140: The Making of Great Leaders with David Gergen" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 140: The Making of Great Leaders</h3>
+                        <p class="text-accent">with David Gergen</p>
+                    </div>
+                </div>
+
+                <!-- Episode 139 -->
+                <div class="artwork-card fade-in delay-4">
+                    <img src="images/podcast/milman+ca.png" alt="Episode 139: The Disappearance of Insects with Oliver Milman" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 139: The Disappearance of Insects</h3>
+                        <p class="text-accent">with Oliver Milman</p>
+                    </div>
+                </div>
+
+                <!-- Episode 138 -->
+                <div class="artwork-card fade-in delay-5"> <!-- Added delay-5 -->
+                    <img src="images/podcast/brotman+ca.png" alt="Episode 138: The Enduring Power of the First Amendment with Stuart Brotman" class="w-full h-80 object-cover">
+                    <div class="artwork-info">
+                        <h3 class="text-xl font-bold text-white">Episode 138: The Enduring Power of the First Amendment</h3>
+                        <p class="text-accent">with Stuart Brotman</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Removed the "View Full Portfolio" button as no link was provided -->
+            <!-- <div class="text-center mt-16 fade-in delay-4">
+                <a href="#" class="golden-btn inline-block px-8 py-4 text-white uppercase tracking-wider">View Full Portfolio</a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-28 px-8 bg-black bg-opacity-50">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Publications</h2>
+
+            <div class="lg:grid lg:grid-cols-4 lg:gap-12">
+                <!-- Navigation (Optional - kept for structure, can be removed if not needed) -->
+                <div class="hidden lg:block publication-nav fade-in">
+                    <h3 class="text-xl font-bold mb-6 text-accent">Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#all" onclick="filterPublications('all'); return false;" class="publication-nav-link active">All Articles</a></li>
+                        <li><a href="#bulwark" onclick="filterPublications('bulwark'); return false;" class="publication-nav-link">The Bulwark</a></li>
+                        <li><a href="#quillette" onclick="filterPublications('quillette'); return false;" class="publication-nav-link">Quillette</a></li>
+                        <li><a href="#forward" onclick="filterPublications('forward'); return false;" class="publication-nav-link">Forward</a></li>
+                        <li><a href="#cfee" onclick="filterPublications('cfee'); return false;" class="publication-nav-link">Center for Free Expression</a></li>
+                    </ul>
+                </div>
+
+                <!-- Publication Cards -->
+                <div class="lg:col-span-3 mt-12 lg:mt-0 space-y-12">
+
+                    <!-- Puccini -->
+                    <div class="publication-card fade-in" data-category="bulwark">
+                        <div class="grid md:grid-cols-3 gap-8 items-center">
+                            <div class="md:col-span-1 overflow-hidden rounded">
+                                <img src="images/puccini.webp" alt="You Need More Puccini in Your Life. Here's Why." class="w-full h-48 object-cover publication-image">
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="flex flex-wrap mb-4">
+                                    <span class="publication-tag">The Bulwark</span>
+                                    <span class="publication-tag">Nov 29, 2024</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">You Need More Puccini in Your Life. Here's Why.</h3>
+                                <p class="mb-4">Exactly 100 years after his death, the giant of Italian opera still thrills and chills.</p>
+                                <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bernstein -->
+                    <div class="publication-card fade-in" data-category="quillette">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                            <div class="md:col-span-1 overflow-hidden rounded">
+                                <img src="images/bernstein.png" alt="Leonard Bernstein Deserved Better Than 'Maestro'" class="w-full h-48 object-cover publication-image">
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="flex flex-wrap mb-4">
+                                    <span class="publication-tag">Quillette</span>
+                                    <span class="publication-tag">Jan 16, 2024</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">Leonard Bernstein Deserved Better Than 'Maestro'</h3>
+                                <p class="mb-4">Netflix somehow managed to turn the most talented, beloved, and complex American musician in history into a two-dimensional domestic villain.</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Art for Art's Sake -->
+                    <div class="publication-card fade-in" data-category="bulwark">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                            <div class="md:col-span-1 overflow-hidden rounded">
+                                <img src="images/Defense of Art for arts sake.webp" alt="A Defense of Art for Art's Sake" class="w-full h-48 object-cover publication-image">
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="flex flex-wrap mb-4">
+                                    <span class="publication-tag">The Bulwark</span>
+                                    <span class="publication-tag">Apr 22, 2022</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">A Defense of Art for Art's Sake</h3>
+                                <p class="mb-4">Concerns over "relevance," argues Jed Perl, obscure the reality of art's eternal role in the cultivation of the individual spirit.</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Restore Your Faith -->
+                     <div class="publication-card fade-in" data-category="quillette">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                 <img src="images/restore your faith.jpg" alt="Want to Restore Your Faith in Humanity? Visit a Scientific Conference" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">Quillette</span>
+                                     <span class="publication-tag">Jan 8, 2022</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">Want to Restore Your Faith in Humanity? Visit a Scientific Conference</h3>
+                                 <p class="mb-4">Meeting the people who are making this world a better place through science provides a much needed sense of balance.</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                    <!-- Aaron Copland -->
+                     <div class="publication-card fade-in" data-category="forward">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                 <img src="images/aaron copland.jpg" alt="On his 121st birthday, four reasons to love Aaron Copland" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">Forward</span>
+                                     <span class="publication-tag">Nov 11, 2021</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">On his 121st birthday, four reasons to love Aaron Copland</h3>
+                                 <p class="mb-4">On Aaron Copland's birthday, I find myself wanting to listen to the opening minute of the composer's sonata for violin and piano on a loop...</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                    <!-- Arnold Schoenberg -->
+                     <div class="publication-card fade-in" data-category="forward">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                 <img src="images/schoenberg changed my life.jpg" alt="How Arnold Schoenberg changed my life" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">Forward</span>
+                                     <span class="publication-tag">Sep 13, 2021</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">How Arnold Schoenberg changed my life (and might even change yours too)</h3>
+                                 <p class="mb-4">I'm a high school music student. I sit, barely twitching, as a foreign-sounding, abrasive, downright unpleasant mash of sounds unfolds around me...</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                    <!-- Beethoven at 250 -->
+                     <div class="publication-card fade-in" data-category="bulwark">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                 <img src="images/beethoven at 250.webp" alt="Beethoven at 250" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">The Bulwark</span>
+                                     <span class="publication-tag">Dec 17, 2020</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">Beethoven at 250: Four Masterpieces to Celebrate the Big Day</h3>
+                                 <p class="mb-4">From mysterious to manic, a small tour of the great composer's works.</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                    <!-- Classical Music Isn't Elitist -->
+                     <div class="publication-card fade-in" data-category="bulwark">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                 <img src="images/classical music isn't elitist.webp" alt="Classical Music Isn't Elitist" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">The Bulwark</span>
+                                     <span class="publication-tag">Nov 01, 2020</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">Classical Music Isn't Elitist</h3>
+                                 <p class="mb-4">But some of its woke critics are.</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                    <!-- Beethoven to the Guillotine? -->
+                     <div class="publication-card fade-in" data-category="cfee">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                  <!-- Using Beethoven 250 image as placeholder -->
+                                 <img src="images/beethoven at 250.webp" alt="Beethoven to the Guillotine?" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">Center for Free Expression</span>
+                                     <span class="publication-tag">Oct 23, 2020</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">Beethoven to the Guillotine?</h3>
+                                 <p class="mb-4">In recent years, certain factions of the "socio-culturally aware" class have been sifting through history...</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                    <!-- Then They Came for Beethoven -->
+                     <div class="publication-card fade-in" data-category="quillette">
+                         <div class="grid md:grid-cols-3 gap-8 items-center">
+                             <div class="md:col-span-1 overflow-hidden rounded">
+                                  <!-- Using Beethoven 250 image as placeholder -->
+                                 <img src="images/beethoven at 250.webp" alt="Then They Came for Beethoven" class="w-full h-48 object-cover publication-image">
+                             </div>
+                             <div class="md:col-span-2">
+                                 <div class="flex flex-wrap mb-4">
+                                     <span class="publication-tag">Quillette</span>
+                                     <span class="publication-tag">Sep 19, 2020</span>
+                                 </div>
+                                 <h3 class="text-2xl font-bold mb-3">Then They Came for Beethoven</h3>
+                                 <p class="mb-4">Beethoven is a truly odd target for progressive critics, because his views on geopolitics are known to have been... quite progressive.</p>
+                                 <a href="#" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+
+                </div> <!-- End Publication Cards -->
+
+            </div> <!-- End Main Grid -->
+        </div>
+    </section>
+    
+    <!-- Events Section -->
+    <section id="Events" class="py-28 px-8 relative">
+        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1543922596-b3baab10f2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); opacity: 0.05;"></div>
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Events</h2>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Current/Recent -->
+                <div class="fade-in">
+                    <div class="border-b border-accent pb-2 mb-6">
+                        <h3 class="text-2xl font-bold text-accent">Recent</h3>
+                    </div>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-xl font-bold mb-1">Solo Recital: Bach Suites</h4>
+                            <p class="text-gray-400 mb-1">Wigmore Hall, London</p>
+                            <p class="text-sm text-accent">October 25, 2024</p>
+                            <a href="#" class="inline-block mt-2 text-sm hover:text-accent transition">View Program →</a>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-1">Aspen Music Festival</h4>
+                            <p class="text-gray-400 mb-1">Chamber Music Performance</p>
+                            <p class="text-sm text-accent">August 12, 2024</p>
+                            <a href="#" class="inline-block mt-2 text-sm hover:text-accent transition">Learn More →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Events -->
+                <div class="fade-in delay-1">
+                    <div class="border-b border-accent pb-2 mb-6">
+                        <h3 class="text-2xl font-bold text-accent">Upcoming</h3>
+                    </div>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-xl font-bold mb-1">Guest Soloist with Berlin Philharmonic</h4>
+                            <p class="text-gray-400 mb-1">Schumann Cello Concerto</p>
+                            <p class="text-sm text-accent">January 15-17, 2025</p>
+                            <a href="#" class="inline-block mt-2 text-sm hover:text-accent transition">Ticket Information →</a>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-1">Masterclass at Juilliard School</h4>
+                            <p class="text-gray-400 mb-1">New York City</p>
+                            <p class="text-sm text-accent">February 5, 2025</p>
+                            <a href="#" class="inline-block mt-2 text-sm hover:text-accent transition">Apply to Participate →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Past Events -->
+                <div class="fade-in delay-2">
+                    <div class="border-b border-accent pb-2 mb-6">
+                        <h3 class="text-2xl font-bold text-accent">Selected Past</h3>
+                    </div>
+                    <div class="space-y-4">
+                         <div>
+                            <h4 class="text-lg font-bold">Louisiana Philharmonic Orchestra</h4>
+                            <p class="text-gray-400 text-sm">Associate Principal Cellist (Tenure)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold">Orquesta Sinfónica de Minería</h4>
+                            <p class="text-gray-400 text-sm">Cellist | Mexico City</p>
+                        </div>
+                         <div>
+                            <h4 class="text-lg font-bold">Solo Recital Series</h4>
+                            <p class="text-gray-400 text-sm">Villa Aurora, Rome</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold">Salzburg Festival Appearance</h4>
+                            <p class="text-gray-400 text-sm">Austria | 2023</p>
+                        </div>
+                         <div>
+                            <h4 class="text-lg font-bold">Guest First Cellist</h4>
+                            <p class="text-gray-400 text-sm">Royal Opera House Muscat, Oman</p>
+                        </div>
+                        <a href="#" class="inline-block mt-4 text-sm hover:text-accent transition">View Full Performance History →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-28 px-8 bg-black bg-opacity-70 relative">
+        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0b800d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80'); opacity: 0.05;"></div>
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Contact</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8">Inquiries</h3>
+                    <p class="mb-8 leading-relaxed text-lg">For inquiries about Daniel's performances, podcast episodes, or writing, please get in touch.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-accent text-xl mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <a href="mailto:daniel@daniellelchuk.com" class="hover:text-accent transition">daniel@daniellelchuk.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-accent text-xl mr-4 mt-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Phone</h4>
+                                <a href="tel:+12125551234" class="hover:text-accent transition">+1 (212) 555-1234</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-accent text-xl mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Studio Address</h4>
+                                <p>123 Art District, Brooklyn, NY 11201</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+                
+                <div class="fade-in delay-1">
+                    <h3 class="text-2xl font-bold mb-8">Send a Message</h3>
+                    <form class="space-y-6">
+                        <div class="relative">
+                            <input type="text" id="name" class="form-input w-full px-4 py-3" placeholder=" ">
+                            <label for="name" class="floating-label">Name</label>
+                        </div>
+                        <div class="relative">
+                            <input type="email" id="email" class="form-input w-full px-4 py-3" placeholder=" ">
+                            <label for="email" class="floating-label">Email</label>
+                        </div>
+                        <div class="relative">
+                            <select id="subject" class="form-input w-full px-4 py-3">
+                                <option value="" selected disabled> </option>
+                                <option value="purchase">Purchase Inquiry</option>
+                                <option value="exhibition">Exhibition Opportunity</option>
+                                <option value="press">Press Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="subject" class="floating-label">Subject</label>
+                        </div>
+                        <div class="relative">
+                            <textarea id="message" rows="5" class="form-input w-full px-4 py-3" placeholder=" "></textarea>
+                            <label for="message" class="floating-label">Message</label>
+                        </div>
+                        <button type="submit" class="golden-btn px-6 py-4 text-white w-full text-lg">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-16 px-8 bg-black">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <a href="#" class="text-2xl font-bold tracking-wider" style="font-family: 'Playfair Display', serif; color: var(--accent);">DANIEL LELCHUK</a>
+                    <p class="mt-2 text-sm text-gray-500">CELLIST</p>
+                </div>
+                <div class="flex space-x-8 mb-8 md:mb-0">
+                    <a href="#about" class="hover:text-accent transition">About</a>
+                    <a href="#podcast" class="hover:text-accent transition">Podcast</a>
+                    <a href="#publications" class="hover:text-accent transition">Publications</a>
+                    <a href="#Events" class="hover:text-accent transition">Events</a>
+                    <a href="#contact" class="hover:text-accent transition">Contact</a>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-accent transition text-xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-accent transition text-xl"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-accent transition text-xl"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="hover:text-accent transition text-xl"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
+                &copy; 2023 Daniel Lelchuk Studio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Custom cursor
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+        
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+        
+        // Make cursor interactive with links and buttons
+        const interactiveElements = document.querySelectorAll("a, button, .artwork-card, input, textarea, select, .publication-card, .publication-tag");
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener("mouseenter", () => {
+                cursorDot.style.transform = "translate(-50%, -50%) scale(1.5)";
+                cursorOutline.style.transform = "translate(-50%, -50%) scale(1.5)";
+                
+                if (element.classList.contains('artwork-card') || element.classList.contains('publication-card')) {
+                    cursorOutline.style.width = "80px";
+                    cursorOutline.style.height = "80px";
+                }
+            });
+            
+            element.addEventListener("mouseleave", () => {
+                cursorDot.style.transform = "translate(-50%, -50%) scale(1)";
+                cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
+                cursorOutline.style.width = "40px";
+                cursorOutline.style.height = "40px";
+            });
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+        }
+        
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('main-nav');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+        
+        // Form floating labels
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', () => {
+                const label = input.nextElementSibling;
+                label.style.transform = 'translateY(-20px)';
+                label.style.fontSize = '0.7rem';
+            });
+            
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    const label = input.nextElementSibling;
+                    label.style.transform = 'translateY(0)';
+                    label.style.fontSize = '0.8rem';
+                }
+            });
+        });
+
+        // Publications filtering
+        function filterPublications(category) {
+            const publications = document.querySelectorAll('.publication-card');
+            const navLinks = document.querySelectorAll('.publication-nav-link');
+            
+            // Update active state in navigation
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${category}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Show/hide publications
+            publications.forEach(pub => {
+                if (category === 'all') {
+                    pub.style.display = 'block';
+                } else if (pub.dataset.category.includes(category)) {
+                    pub.style.display = 'block';
+                } else {
+                    pub.style.display = 'none';
+                }
+            });
+        }
+
+        // Show specific publication (for featured links)
+        function showPublication(publicationId) {
+            const publications = document.querySelectorAll('.publication-card');
+            const navLinks = document.querySelectorAll('.publication-nav-link');
+            
+            // Update active state in navigation
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${publicationId}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Show only the selected publication
+            publications.forEach(pub => {
+                if (pub.dataset.category.includes(publicationId)) {
+                    pub.style.display = 'block';
+                } else {
+                    pub.style.display = 'none';
+                }
+            });
+        }
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=delgesu/test" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
