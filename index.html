@@ -37,49 +37,31 @@
         }
         
         .artwork-card {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: scale(0.98);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 2rem;
         }
         
         .artwork-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-        
-        .artwork-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(193, 154, 107, 0.15);
-        }
-        
-        .artwork-card:hover::before {
-            opacity: 1;
-        }
-        
-        .artwork-card:hover .artwork-info {
-            transform: translateY(0);
-            opacity: 1;
+            display: none;
         }
         
         .artwork-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 2;
+            position: static;
+            opacity: 1;
+            transform: none;
+            padding: 1rem 0 0 0;
+            text-align: center;
+            z-index: auto;
+            transition: none;
+            color: var(--secondary);
+        }
+        
+        .artwork-info h3 {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .artwork-info p {
+            color: var(--accent);
         }
         
         .gallery-grid {
@@ -483,18 +465,18 @@
                 backdrop-filter: none;
                 box-shadow: none; /* Also remove shadow when transparent */
             }
-        }
 
-        /* Styles for shrunk mobile nav */
-        #main-nav.nav-shrunk {
-            padding-top: 0.5rem; /* py-2 */
-            padding-bottom: 0.5rem; /* py-2 */
-            transition: padding 0.3s ease-in-out;
-        }
+            /* Styles for shrunk mobile nav */
+            #main-nav.nav-shrunk {
+                padding-top: 0.5rem; /* py-2 */
+                padding-bottom: 0.5rem; /* py-2 */
+                transition: padding 0.3s ease-in-out;
+            }
 
-        #main-nav.nav-shrunk img {
-            height: 2.5rem; /* h-10 */
-            transition: height 0.3s ease-in-out;
+            #main-nav.nav-shrunk img {
+                height: 2.5rem; /* h-10 */
+                transition: height 0.3s ease-in-out;
+            }
         }
     </style>
 </head>
