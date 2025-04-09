@@ -1768,17 +1768,27 @@
         const scrollThreshold = 50; // Pixels scrolled before shrinking
 
         function handleNavShrink() {
-            if (window.scrollY > scrollThreshold) {
-                mainNavElement.classList.add('nav-shrunk');
-                mainNavElement.classList.add('bg-black', 'bg-opacity-50', 'backdrop-blur-sm');
+            const isMobile = window.innerWidth < 768; // Check if mobile view (matches media query)
+            
+            if (isMobile) {
+                // Always use small logo on mobile
                 if (logoImg.src.endsWith(originalLogoSrc)) {
                     logoImg.src = smallLogoSrc;
                 }
             } else {
-                mainNavElement.classList.remove('nav-shrunk');
-                mainNavElement.classList.remove('bg-black', 'bg-opacity-50', 'backdrop-blur-sm');
-                if (logoImg.src.endsWith(smallLogoSrc)) {
-                    logoImg.src = originalLogoSrc;
+                // On desktop, change logo based on scroll position
+                if (window.scrollY > scrollThreshold) {
+                    mainNavElement.classList.add('nav-shrunk');
+                    mainNavElement.classList.add('bg-black', 'bg-opacity-50', 'backdrop-blur-sm');
+                    if (logoImg.src.endsWith(originalLogoSrc)) {
+                        logoImg.src = smallLogoSrc;
+                    }
+                } else {
+                    mainNavElement.classList.remove('nav-shrunk');
+                    mainNavElement.classList.remove('bg-black', 'bg-opacity-50', 'backdrop-blur-sm');
+                    if (logoImg.src.endsWith(smallLogoSrc)) {
+                        logoImg.src = originalLogoSrc;
+                    }
                 }
             }
         }
@@ -1787,6 +1797,9 @@
         window.addEventListener('resize', handleNavShrink); // Handle resize events too
         // Initial check in case the page loads already scrolled or in mobile view
         handleNavShrink();
+        
+        // Also run when DOM is fully loaded to guarantee correct logo on initial page load
+        document.addEventListener('DOMContentLoaded', handleNavShrink);
 
         // Gallery Lightbox Functionality
         const galleryItems = document.querySelectorAll('.gallery-item img');
