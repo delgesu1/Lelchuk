@@ -1627,6 +1627,16 @@
             });
         });
         
+        // Logo click to scroll to top
+        const logoLink = document.querySelector('#main-nav .block.flex-shrink-0');
+        logoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1640,6 +1650,26 @@
                 }
             });
         });
+        
+        // Manage external links: open in same tab on mobile, new tab on desktop
+        function setupExternalLinks() {
+            const isMobile = window.innerWidth < 768;
+            const externalLinks = document.querySelectorAll('a[href^="http"]');
+            
+            externalLinks.forEach(link => {
+                if (isMobile) {
+                    // On mobile, open in same tab
+                    link.setAttribute('target', '_self');
+                } else {
+                    // On desktop, open in new tab
+                    link.setAttribute('target', '_blank');
+                }
+            });
+        }
+        
+        // Run on page load and resize
+        window.addEventListener('load', setupExternalLinks);
+        window.addEventListener('resize', setupExternalLinks);
         
         // Animation on scroll
         const fadeElements = document.querySelectorAll('.fade-in');
