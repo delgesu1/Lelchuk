@@ -632,18 +632,56 @@
                 font-size: calc(1.25rem * 0.75) !important; /* 25% smaller than text-xl (1.25rem) */
             }
             
-            /* Ensure scroll indicator is visible on mobile */
+            /* Mobile scroll indicator styles - completely redesigned */
             .scroll-indicator {
-                bottom: 25px;
-                width: 26px;
-                height: 40px;
-                z-index: 10;
-                opacity: 1;
                 display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                position: absolute !important;
+                bottom: 30px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 40px !important;
+                height: 60px !important;
+                border: 3px solid var(--accent) !important;
+                border-radius: 20px !important;
+                z-index: 50 !important;
+                animation: none !important;
+                background-color: rgba(0, 0, 0, 0.2) !important;
             }
             
             .scroll-indicator::before {
-                animation-duration: 1.5s;
+                content: '' !important;
+                position: absolute !important;
+                top: 10px !important;
+                left: 50% !important;
+                width: 10px !important;
+                height: 10px !important;
+                background-color: var(--accent) !important;
+                border-radius: 50% !important;
+                transform: translateX(-50%) !important;
+                animation: mobileScrollAnimation 2s infinite !important;
+                opacity: 1 !important;
+            }
+            
+            @keyframes mobileScrollAnimation {
+                0% { top: 10px; opacity: 1; }
+                100% { top: 35px; opacity: 0; }
+            }
+            
+            .scroll-text {
+                position: absolute !important;
+                bottom: -30px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 100% !important;
+                color: var(--accent) !important;
+                font-size: 14px !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                letter-spacing: 0.2em !important;
+                opacity: 1 !important;
+                text-transform: uppercase !important;
             }
             
             .cursor-dot,
@@ -1081,7 +1119,7 @@
                 <a href="#publications" class="golden-border-btn inline-block px-8 py-3 uppercase tracking-wider">Read Latest Articles</a>
             </div>
         </div>
-        <div class="scroll-indicator fade-in delay-3">
+        <div class="scroll-indicator">
             <!-- Animated dot is handled by ::before pseudo-element -->
             <span class="scroll-text">Scroll</span>
         </div>
