@@ -615,6 +615,14 @@
                 z-index: 2;
             }
             
+            /* Fix mobile centering issues */
+            .hero-image .container {
+                padding-left: 0; /* Remove horizontal padding that causes off-center appearance */
+                padding-right: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            
             /* Make hero text smaller on mobile */
             .hero-image h1 {
                 font-size: calc(3rem * 0.65) !important; /* 35% smaller than text-5xl (3rem) */
@@ -624,21 +632,18 @@
                 font-size: calc(1.25rem * 0.75) !important; /* 25% smaller than text-xl (1.25rem) */
             }
             
-            /* Ensure hero content is centered on mobile */
-            .hero-image .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                width: 100%;
+            /* Ensure scroll indicator is visible on mobile */
+            .scroll-indicator {
+                bottom: 25px;
+                width: 26px;
+                height: 40px;
+                z-index: 10;
+                opacity: 1;
+                display: block !important;
             }
             
-            /* Make sure scroll indicator is visible on mobile */
-            .scroll-indicator {
-                opacity: 0.8;
-                bottom: 20px; /* Move up slightly on mobile */
-                z-index: 10;
+            .scroll-indicator::before {
+                animation-duration: 1.5s;
             }
             
             .cursor-dot,
