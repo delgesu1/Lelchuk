@@ -624,6 +624,23 @@
                 font-size: calc(1.25rem * 0.75) !important; /* 25% smaller than text-xl (1.25rem) */
             }
             
+            /* Ensure hero content is centered on mobile */
+            .hero-image .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: 100%;
+            }
+            
+            /* Make sure scroll indicator is visible on mobile */
+            .scroll-indicator {
+                opacity: 0.8;
+                bottom: 20px; /* Move up slightly on mobile */
+                z-index: 10;
+            }
+            
             .cursor-dot,
             .cursor-outline {
                 display: none;
