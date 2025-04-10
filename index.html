@@ -1205,24 +1205,32 @@
     
     <!-- Publications Section -->
     <section id="publications" class="py-28 px-8 bg-black bg-opacity-50">
-        <div class="container mx-auto max-w-7xl">
+        <div class="container mx-auto max-w-6xl">
             <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Publications</h2>
 
             <div class="lg:grid lg:grid-cols-4 lg:gap-12">
-                <!-- Navigation (Optional - kept for structure, can be removed if not needed) -->
-                <div class="hidden lg:block publication-nav fade-in">
-                    <h3 class="text-xl font-bold mb-6 text-accent">Categories</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#all" onclick="filterPublications('all'); return false;" class="publication-nav-link active">All Articles</a></li>
-                        <li><a href="#bulwark" onclick="filterPublications('bulwark'); return false;" class="publication-nav-link">The Bulwark</a></li>
-                        <li><a href="#quillette" onclick="filterPublications('quillette'); return false;" class="publication-nav-link">Quillette</a></li>
-                        <li><a href="#forward" onclick="filterPublications('forward'); return false;" class="publication-nav-link">Forward</a></li>
-                        <li><a href="#cfee" onclick="filterPublications('cfee'); return false;" class="publication-nav-link">Center for Free Expression</a></li>
-                    </ul>
-                </div>
+                <!-- Categories Sidebar Removed -->
 
-                <!-- Publication Cards -->
-                <div class="lg:col-span-3 mt-12 lg:mt-0 space-y-12">
+                <!-- Publication Cards - Taking full width -->
+                <div class="lg:col-span-4 mt-12 lg:mt-0 space-y-12">
+
+                    <!-- New Article - Tom Fitzmorris -->
+                    <div class="publication-card fade-in" data-category="quillette">
+                        <div class="grid md:grid-cols-3 gap-8 items-center">
+                            <div class="md:col-span-1 overflow-hidden rounded">
+                                <img src="images/articles/Copy-of-Copy-of-Feature-Images-5.png" alt="Remembering Tom Fitzmorris, Tireless Champion of New Orleans' Unique Culinary Culture" class="w-full h-48 object-cover publication-image">
+                            </div>
+                            <div class="md:col-span-2">
+                                <div class="mb-4"> <!-- Removed flex classes -->
+                                    <span class="publication-tag">Quillette</span>
+                                    <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">April 3, 2025</span> <!-- Changed text-xs to text-sm -->
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">Remembering Tom Fitzmorris, Tireless Champion of New Orleans' Unique Culinary Culture</h3>
+                                <p class="mb-4">By helping neighbours find their way back to restaurants after Hurricane Katrina—and encouraging tourists to find their way back to the Big Easy—Tom Fitzmorris fed the soul of this most soulful city.</p>
+                                <a href="https://quillette.com/2025/04/03/remembering-tom-fitzmorris-tireless-champion-of-new-orleans-unique-culinary-culture-2/" target="_blank" rel="noopener noreferrer" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read</a>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Puccini -->
                     <div class="publication-card fade-in" data-category="bulwark">
@@ -1231,9 +1239,9 @@
                                 <img src="images/puccini.webp" alt="You Need More Puccini in Your Life. Here's Why." class="w-full h-48 object-cover publication-image">
                             </div>
                             <div class="md:col-span-2">
-                                <div class="flex flex-wrap mb-4">
+                                <div class="mb-4"> <!-- Removed flex classes -->
                                     <span class="publication-tag">The Bulwark</span>
-                                    <span class="publication-tag">Nov 29, 2024</span>
+                                    <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">November 29, 2024</span> <!-- Changed text-xs to text-sm -->
                                 </div>
                                 <h3 class="text-2xl font-bold mb-3">You Need More Puccini in Your Life. Here's Why.</h3>
                                 <p class="mb-4">Exactly 100 years after his death, the giant of Italian opera still thrills and chills.</p>
@@ -1249,9 +1257,9 @@
                                 <img src="images/bernstein.png" alt="Leonard Bernstein Deserved Better Than 'Maestro'" class="w-full h-48 object-cover publication-image">
                             </div>
                             <div class="md:col-span-2">
-                                <div class="flex flex-wrap mb-4">
+                                <div class="mb-4"> <!-- Removed flex classes -->
                                     <span class="publication-tag">Quillette</span>
-                                    <span class="publication-tag">Jan 16, 2024</span>
+                                    <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">January 16, 2024</span> <!-- Changed text-xs to text-sm -->
                                 </div>
                                 <h3 class="text-2xl font-bold mb-3">Leonard Bernstein Deserved Better Than 'Maestro'</h3>
                                 <p class="mb-4">Netflix somehow managed to turn the most talented, beloved, and complex American musician in history into a two-dimensional domestic villain.</p>
@@ -1267,9 +1275,9 @@
                                 <img src="images/Defense of Art for arts sake.webp" alt="A Defense of Art for Art's Sake" class="w-full h-48 object-cover publication-image">
                             </div>
                             <div class="md:col-span-2">
-                                <div class="flex flex-wrap mb-4">
+                                <div class="mb-4"> <!-- Removed flex classes -->
                                     <span class="publication-tag">The Bulwark</span>
-                                    <span class="publication-tag">Apr 22, 2022</span>
+                                    <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">April 22, 2022</span> <!-- Changed text-xs to text-sm -->
                                 </div>
                                 <h3 class="text-2xl font-bold mb-3">A Defense of Art for Art's Sake</h3>
                                 <p class="mb-4">Concerns over "relevance," argues Jed Perl, obscure the reality of art's eternal role in the cultivation of the individual spirit.</p>
@@ -1285,9 +1293,9 @@
                                  <img src="images/restore your faith.jpg" alt="Want to Restore Your Faith in Humanity? Visit a Scientific Conference" class="w-full h-48 object-cover publication-image">
                              </div>
                              <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
+                                 <div class="mb-4"> <!-- Removed flex classes -->
                                      <span class="publication-tag">Quillette</span>
-                                     <span class="publication-tag">Jan 8, 2022</span>
+                                     <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">January 8, 2022</span> <!-- Changed text-xs to text-sm -->
                                  </div>
                                  <h3 class="text-2xl font-bold mb-3">Want to Restore Your Faith in Humanity? Visit a Scientific Conference</h3>
                                  <p class="mb-4">Meeting the people who are making this world a better place through science provides a much needed sense of balance.</p>
@@ -1303,9 +1311,9 @@
                                  <img src="images/aaron copland.jpg" alt="On his 121st birthday, four reasons to love Aaron Copland" class="w-full h-48 object-cover publication-image">
                              </div>
                              <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
+                                 <div class="mb-4"> <!-- Removed flex classes -->
                                      <span class="publication-tag">Forward</span>
-                                     <span class="publication-tag">Nov 11, 2021</span>
+                                     <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">November 11, 2021</span> <!-- Changed text-xs to text-sm -->
                                  </div>
                                  <h3 class="text-2xl font-bold mb-3">On his 121st birthday, four reasons to love Aaron Copland</h3>
                                  <p class="mb-4">On Aaron Copland's birthday, I find myself wanting to listen to the opening minute of the composer's sonata for violin and piano on a loop...</p>
@@ -1321,9 +1329,9 @@
                                  <img src="images/schoenberg changed my life.jpg" alt="How Arnold Schoenberg changed my life" class="w-full h-48 object-cover publication-image">
                              </div>
                              <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
+                                 <div class="mb-4"> <!-- Removed flex classes -->
                                      <span class="publication-tag">Forward</span>
-                                     <span class="publication-tag">Sep 13, 2021</span>
+                                     <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">September 13, 2021</span> <!-- Changed text-xs to text-sm -->
                                  </div>
                                  <h3 class="text-2xl font-bold mb-3">How Arnold Schoenberg changed my life (and might even change yours too)</h3>
                                  <p class="mb-4">I'm a high school music student. I sit, barely twitching, as a foreign-sounding, abrasive, downright unpleasant mash of sounds unfolds around me...</p>
@@ -1339,69 +1347,13 @@
                                  <img src="images/beethoven at 250.webp" alt="Beethoven at 250" class="w-full h-48 object-cover publication-image">
                              </div>
                              <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
+                                 <div class="mb-4"> <!-- Removed flex classes -->
                                      <span class="publication-tag">The Bulwark</span>
-                                     <span class="publication-tag">Dec 17, 2020</span>
+                                     <span class="block text-sm uppercase tracking-wider text-secondary opacity-70 mt-2">December 17, 2020</span> <!-- Changed text-xs to text-sm -->
                                  </div>
                                  <h3 class="text-2xl font-bold mb-3">Beethoven at 250: Four Masterpieces to Celebrate the Big Day</h3>
                                  <p class="mb-4">From mysterious to manic, a small tour of the great composer's works.</p>
                                  <a href="https://www.thebulwark.com/p/beethoven-at-250-four-masterpieces-to-celebrate-the-big-day" target="_blank" rel="noopener noreferrer" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read</a>
-                             </div>
-                         </div>
-                     </div>
-
-                    <!-- Classical Music Isn't Elitist -->
-                     <div class="publication-card fade-in" data-category="bulwark">
-                         <div class="grid md:grid-cols-3 gap-8 items-center">
-                             <div class="md:col-span-1 overflow-hidden rounded">
-                                 <img src="images/classical music isn't elitist.webp" alt="Classical Music Isn't Elitist" class="w-full h-48 object-cover publication-image">
-                             </div>
-                             <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
-                                     <span class="publication-tag">The Bulwark</span>
-                                     <span class="publication-tag">Nov 01, 2020</span>
-                                 </div>
-                                 <h3 class="text-2xl font-bold mb-3">Classical Music Isn't Elitist</h3>
-                                 <p class="mb-4">But some of its woke critics are.</p>
-                                 <a href="https://www.thebulwark.com/p/classical-music-isnt-elitist" target="_blank" rel="noopener noreferrer" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read</a>
-                             </div>
-                         </div>
-                     </div>
-
-                    <!-- Beethoven to the Guillotine? -->
-                     <div class="publication-card fade-in" data-category="cfee">
-                         <div class="grid md:grid-cols-3 gap-8 items-center">
-                             <div class="md:col-span-1 overflow-hidden rounded">
-                                  <!-- Using Beethoven 250 image as placeholder -->
-                                 <img src="images/beethoven2.jpg" alt="Beethoven to the Guillotine?" class="w-full h-48 object-cover publication-image">
-                             </div>
-                             <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
-                                     <span class="publication-tag">Center for Free Expression</span>
-                                     <span class="publication-tag">Oct 23, 2020</span>
-                                 </div>
-                                 <h3 class="text-2xl font-bold mb-3">Beethoven to the Guillotine?</h3>
-                                 <p class="mb-4">In recent years, certain factions of the "socio-culturally aware" class have been sifting through history...</p>
-                                 <a href="https://cfe.torontomu.ca/blog/2020/10/beethoven-guillotine" target="_blank" rel="noopener noreferrer" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read</a>
-                             </div>
-                         </div>
-                     </div>
-
-                    <!-- Then They Came for Beethoven -->
-                     <div class="publication-card fade-in" data-category="quillette">
-                         <div class="grid md:grid-cols-3 gap-8 items-center">
-                             <div class="md:col-span-1 overflow-hidden rounded">
-                                  <!-- Using Beethoven 250 image as placeholder -->
-                                 <img src="images/download-1.png" alt="Then They Came for Beethoven" class="w-full h-48 object-cover publication-image">
-                             </div>
-                             <div class="md:col-span-2">
-                                 <div class="flex flex-wrap mb-4">
-                                     <span class="publication-tag">Quillette</span>
-                                     <span class="publication-tag">Sep 19, 2020</span>
-                                 </div>
-                                 <h3 class="text-2xl font-bold mb-3">Then They Came for Beethoven</h3>
-                                 <p class="mb-4">Beethoven is a truly odd target for progressive critics, because his views on geopolitics are known to have been... quite progressive.</p>
-                                 <a href="https://quillette.com/2020/09/19/then-they-came-for-beethoven/" target="_blank" rel="noopener noreferrer" class="read-more-btn golden-border-btn inline-block px-4 py-2 text-sm">Read</a>
                              </div>
                          </div>
                      </div>
@@ -1520,7 +1472,7 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="fade-in">
                     <h3 class="text-2xl font-bold mb-8">Inquiries</h3>
-                    <p class="mb-8 leading-relaxed text-lg">For inquiries about Daniel's performances, podcast episodes, or writing, please get in touch.</p>
+                    <p class="mb-8 leading-relaxed text-lg">For inquiries, please get in touch.</p>
                     
                     <div class="space-y-6">
                         <div class="flex items-start">
@@ -1532,11 +1484,8 @@
                                 <a href="mailto:daniel.lelchuk@gmail.com" class="hover:text-accent transition">daniel.lelchuk@gmail.com</a>
                             </div>
                         </div>
-                        <!-- Removed Phone Div -->
-                        <!-- Removed Address Div -->
                     </div>
                     
-                
                 </div>
                 
                 <div class="fade-in delay-1">
