@@ -1077,19 +1077,20 @@
     
     <!-- Navigation -->
     <nav id="main-nav" class="fixed w-full z-50 py-4 px-8 transition-all duration-500">
-        <div class="w-full flex justify-between items-center">
+        <div class="w-full flex items-center">
             <a href="#" class="block flex-shrink-0">
                 <img src="images/LelchukLogo.png" alt="Daniel Lelchuk Logo" class="h-14 transition-all duration-300">
             </a>
-            <!-- Centered Navigation Links -->
-            <div class="hidden md:flex flex-grow justify-center space-x-8">
+            <!-- Left-aligned Navigation Links with small gap -->
+            <div class="hidden md:flex ml-10 space-x-8">
                 <a href="#about" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">About</a>
                 <a href="#publications" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Publications</a>
                 <a href="#podcast" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Podcast</a>
+                <a href="#gallery" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Gallery</a>
                 <a href="#contact" class="nav-link uppercase text-sm tracking-wider hover:text-accent transition">Contact</a>
             </div>
-            <!-- Mobile Menu Button (aligned right) -->
-            <div class="flex-shrink-0">
+            <!-- Mobile Menu Button (aligned right with margin-left:auto) -->
+            <div class="ml-auto flex-shrink-0">
                 <button id="mobile-menu-button" class="md:hidden menu-btn">
                     <div class="menu-btn__lines"></div>
                 </button>
@@ -1104,6 +1105,7 @@
                 <a href="#about" class="mobile-menu-link text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">About</a>
                 <a href="#publications" class="mobile-menu-link text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Publications</a>
                 <a href="#podcast" class="mobile-menu-link text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Podcast</a>
+                <a href="#gallery" class="mobile-menu-link text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Gallery</a>
                 <a href="#contact" class="mobile-menu-link text-3xl font-light hover:text-accent transition py-4" onclick="closeMobileMenu()">Contact</a>
             </div>
             <div class="mobile-social flex justify-center space-x-6">
