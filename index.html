@@ -725,6 +725,22 @@
              background-color: #272726;
         }
 
+        /* Base Nav Styles - Add Transitions */
+        #main-nav {
+            /* Keep existing fixed, w-full, z-50, py-4, px-8 from HTML */
+            /* Apply transitions using CSS for smoothness */
+            transition: padding 0.4s ease-in-out, background-color 0.4s ease-in-out, backdrop-filter 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+        }
+
+        #main-nav img {
+             /* Keep existing h-14 from HTML */
+             /* Apply height transition */
+            transition: height 0.4s ease-in-out;
+        }
+
+        /* --- End Base Nav Styles --- */
+
+
         /* Podcast Cards Stack Animation Styles */
         .podcast-card-stack {
             position: relative;
@@ -793,6 +809,19 @@
                 left: 10%;
             }
         }
+
+        /* Add Desktop Shrunk Styles */
+        @media (min-width: 768px) {
+            #main-nav.nav-shrunk {
+                padding-top: 0.5rem; /* py-2 */
+                padding-bottom: 0.5rem; /* py-2 */
+                /* Background/blur applied by JS adding classes, transition handles smoothness */
+            }
+            #main-nav.nav-shrunk img {
+                height: 2.5rem; /* h-10 */
+            }
+        }
+        /* --- End Desktop Shrunk Styles --- */
 
         /* Podcast Wall Styles */
         .podcast-wall {
@@ -1076,10 +1105,10 @@
     <div class="cursor-outline"></div>
     
     <!-- Navigation -->
-    <nav id="main-nav" class="fixed w-full z-50 py-4 px-8 transition-all duration-500">
+    <nav id="main-nav" class="fixed w-full z-50 py-4 px-8">
         <div class="w-full flex items-center">
             <a href="#" class="block flex-shrink-0">
-                <img src="images/LelchukLogo.png" alt="Daniel Lelchuk Logo" class="h-14 transition-all duration-300">
+                <img src="images/LelchukLogo.png" alt="Daniel Lelchuk Logo" class="h-14">
             </a>
             <!-- Left-aligned Navigation Links with small gap -->
             <div class="hidden md:flex ml-10 space-x-8">
