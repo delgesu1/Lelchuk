@@ -1049,14 +1049,14 @@
         .loader-logo {
             opacity: 0;
             transform: translateX(-15px);
-            animation: logoFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+            animation: logoFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards; /* Slower animation */
         }
         
         .loader-f-hole {
             margin-left: 15px; /* Space between logo and f-hole */
             opacity: 0;
             transform: translateX(15px);
-            animation: fHoleFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+            animation: fHoleFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards; /* Slower animation with more delay */
         }
         
         .loader-logo-img {
@@ -1999,13 +1999,14 @@
             }
             
             // Set a minimum display time for better UX
-            const minDisplayTime = 600; // ms
+            const minDisplayTime = 1500; // Increased to 1.5 seconds so it's visible to users
             const startTime = Date.now();
             
             // Option 1: DOM Content Loaded - faster than waiting for all resources
             const elapsedTime = Date.now() - startTime;
             if (elapsedTime < minDisplayTime) {
                 // If DOM loaded quickly, wait until minimum display time
+                console.log('Preloader will be visible for', minDisplayTime - elapsedTime, 'ms');
                 setTimeout(hidePreloader, minDisplayTime - elapsedTime);
             } else {
                 // If loading took longer, hide immediately
