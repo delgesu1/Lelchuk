@@ -27,6 +27,13 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Preload critical hero image -->
+    <link rel="preload" href="images/lelchuk small.jpg" as="image" media="(min-width: 768px)">
+    <link rel="preload" href="images/LelchukLogo.png" as="image">
+    <link rel="preload" href="images/LelchukLogoSmall.png" as="image">
+    <link rel="preload" href="images/f hole.png" as="image">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:wght@500;700&display=swap');
         
@@ -55,6 +62,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-color: #0a0a0a; /* Add a placeholder color to avoid flash of white */
         }
         
         .artwork-card {
@@ -1017,12 +1025,13 @@
             align-items: center;
             z-index: 10000; /* Ensure it's on top */
             opacity: 1;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s; /* Smooth fade out with delay */
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Removed delay for faster transition */
         }
 
         #preloader.hidden {
             opacity: 0;
             pointer-events: none; /* Disable interaction when hidden */
+            visibility: hidden; /* Added to completely hide the preloader once faded out */
         }
 
         .loader-container {
@@ -1171,7 +1180,8 @@
                 <!-- Floated Image Container with Responsive Widths -->
                 <div class="hidden md:block fade-in relative w-full mb-8 md:float-left md:w-1/2 md:mr-12 lg:w-auto lg:max-w-[550px] lg:mr-12">
                     <div class="absolute -inset-4 border border-accent opacity-20"></div>
-                    <img src="images/309390072_10221820391282083_1917061141849135985_n.jpg" alt="Daniel Lelchuk playing cello" class="w-full object-cover relative z-10">
+                    <!-- First image in About section - Keep eager loading since it's important but below fold -->
+                    <img src="images/309390072_10221820391282083_1917061141849135985_n.jpg" alt="Daniel Lelchuk playing cello" class="w-full object-cover relative z-10" loading="lazy">
                     <div class="absolute -bottom-6 -right-6 w-24 h-24 border-t border-r border-accent opacity-50"></div>
                 </div>
                 <!-- Text Content - will flow around float -->
@@ -1211,7 +1221,8 @@
                 <!-- Square 1: Castleton -->
                 <a href="https://castletonmusic.org/" target="_blank" rel="noopener noreferrer" class="group block bg-[--primary] bg-opacity-60 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-accent/20 hover:shadow-xl hover:-translate-y-1 border border-transparent hover:border-accent/30">
                     <div class="overflow-hidden">
-                        <img src="images/gallery/IMG_9105.jpg" alt="Castleton Chamber Players" class="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105">
+                        <!-- Activities section images - add lazy loading -->
+                        <img src="images/gallery/IMG_9105.jpg" alt="Castleton Chamber Players" class="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105" loading="lazy">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl lg:text-2xl font-semibold mb-2 text-secondary group-hover:text-accent transition-colors duration-300" style="font-family: 'Playfair Display', serif;">Castleton Chamber Players</h3>
@@ -1222,7 +1233,8 @@
                 <!-- Square 2: Aegis -->
                 <a href="https://www.youtube.com/watch?v=tKPMMBWIf4s" target="_blank" rel="noopener noreferrer" class="group block bg-[--primary] bg-opacity-60 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-accent/20 hover:shadow-xl hover:-translate-y-1 border border-transparent hover:border-accent/30">
                     <div class="overflow-hidden">
-                        <img src="images/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105">
+                        <!-- Activities section images - add lazy loading -->
+                        <img src="images/aegis-piano-trio.jpg" alt="Aegis Piano Trio" class="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105" loading="lazy">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl lg:text-2xl font-semibold mb-2 text-secondary group-hover:text-accent transition-colors duration-300" style="font-family: 'Playfair Display', serif;">Aegis Piano Trio</h3>
@@ -1249,7 +1261,8 @@
                     <div class="publication-card fade-in" data-category="quillette">
                         <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
-                                <img src="images/articles/Copy-of-Copy-of-Feature-Images-5.png" alt="Remembering Tom Fitzmorris, Tireless Champion of New Orleans' Unique Culinary Culture" class="w-full h-48 object-cover publication-image">
+                                <!-- Publications section images - add lazy loading -->
+                                <img src="images/articles/Copy-of-Copy-of-Feature-Images-5.png" alt="Remembering Tom Fitzmorris, Tireless Champion of New Orleans' Unique Culinary Culture" class="w-full h-48 object-cover publication-image" loading="lazy">
                             </div>
                             <div class="md:col-span-2">
                                 <div class="mb-4"> <!-- Removed flex classes -->
@@ -1267,7 +1280,8 @@
                     <div class="publication-card fade-in" data-category="bulwark">
                         <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
-                                <img src="images/puccini.webp" alt="You Need More Puccini in Your Life. Here's Why." class="w-full h-48 object-cover publication-image">
+                                <!-- Publications section images - add lazy loading -->
+                                <img src="images/puccini.webp" alt="You Need More Puccini in Your Life. Here's Why." class="w-full h-48 object-cover publication-image" loading="lazy">
                             </div>
                             <div class="md:col-span-2">
                                 <div class="mb-4"> <!-- Removed flex classes -->
@@ -1285,7 +1299,8 @@
                     <div class="publication-card fade-in" data-category="quillette">
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
-                                <img src="images/bernstein.png" alt="Leonard Bernstein Deserved Better Than 'Maestro'" class="w-full h-48 object-cover publication-image">
+                                <!-- Publications section images - add lazy loading -->
+                                <img src="images/bernstein.png" alt="Leonard Bernstein Deserved Better Than 'Maestro'" class="w-full h-48 object-cover publication-image" loading="lazy">
                             </div>
                             <div class="md:col-span-2">
                                 <div class="mb-4"> <!-- Removed flex classes -->
@@ -1303,7 +1318,8 @@
                     <div class="publication-card fade-in" data-category="bulwark">
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
-                                <img src="images/Defense of Art for arts sake.webp" alt="A Defense of Art for Art's Sake" class="w-full h-48 object-cover publication-image">
+                                <!-- Publications section images - add lazy loading -->
+                                <img src="images/Defense of Art for arts sake.webp" alt="A Defense of Art for Art's Sake" class="w-full h-48 object-cover publication-image" loading="lazy">
                             </div>
                             <div class="md:col-span-2">
                                 <div class="mb-4"> <!-- Removed flex classes -->
@@ -1321,7 +1337,8 @@
                      <div class="publication-card fade-in" data-category="quillette">
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
-                                 <img src="images/restore your faith.jpg" alt="Want to Restore Your Faith in Humanity? Visit a Scientific Conference" class="w-full h-48 object-cover publication-image">
+                                 <!-- Publications section images - add lazy loading -->
+                                 <img src="images/restore your faith.jpg" alt="Want to Restore Your Faith in Humanity? Visit a Scientific Conference" class="w-full h-48 object-cover publication-image" loading="lazy">
                              </div>
                              <div class="md:col-span-2">
                                  <div class="mb-4"> <!-- Removed flex classes -->
@@ -1339,7 +1356,8 @@
                      <div class="publication-card fade-in" data-category="forward">
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
-                                 <img src="images/aaron copland.jpg" alt="On his 121st birthday, four reasons to love Aaron Copland" class="w-full h-48 object-cover publication-image">
+                                 <!-- Publications section images - add lazy loading -->
+                                 <img src="images/aaron copland.jpg" alt="On his 121st birthday, four reasons to love Aaron Copland" class="w-full h-48 object-cover publication-image" loading="lazy">
                              </div>
                              <div class="md:col-span-2">
                                  <div class="mb-4"> <!-- Removed flex classes -->
@@ -1357,7 +1375,8 @@
                      <div class="publication-card fade-in" data-category="forward">
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
-                                 <img src="images/schoenberg changed my life.jpg" alt="How Arnold Schoenberg changed my life" class="w-full h-48 object-cover publication-image">
+                                 <!-- Publications section images - add lazy loading -->
+                                 <img src="images/schoenberg changed my life.jpg" alt="How Arnold Schoenberg changed my life" class="w-full h-48 object-cover publication-image" loading="lazy">
                              </div>
                              <div class="md:col-span-2">
                                  <div class="mb-4"> <!-- Removed flex classes -->
@@ -1375,7 +1394,8 @@
                      <div class="publication-card fade-in" data-category="bulwark">
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
-                                 <img src="images/beethoven at 250.webp" alt="Beethoven at 250" class="w-full h-48 object-cover publication-image">
+                                 <!-- Publications section images - add lazy loading -->
+                                 <img src="images/beethoven at 250.webp" alt="Beethoven at 250" class="w-full h-48 object-cover publication-image" loading="lazy">
                              </div>
                              <div class="md:col-span-2">
                                  <div class="mb-4"> <!-- Removed flex classes -->
@@ -1406,7 +1426,8 @@
             <div class="w-full md:basis-1/2 flex flex-col items-center py-20 md:py-14 flex-shrink">
                 <!-- Apply 35px padding directly to content wrappers -->
                 <div class="flex justify-center w-full px-[35px]">
-                    <img src="images/Talking+Beats+LOGO+(white)_web.png" alt="Talking Beats Podcast" class="w-full">
+                    <!-- Podcast section - Lazy load logo and images -->
+                    <img src="images/Talking+Beats+LOGO+(white)_web.png" alt="Talking Beats Podcast" class="w-full" loading="lazy">
                     </div>
                 <!-- Tagline container, text right on desktop -->
                 <div class="w-full text-center md:text-right mt-3 px-[35px]">
@@ -1424,22 +1445,22 @@
             <div class="w-full flex-grow">
                 <div class="podcast-wall h-full">
                     <!-- First row -->
-                    <div class="podcast-wall-item"><img src="images/podcast/walter+isaacson+ca.png" alt="Walter Isaacson" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/MTT+ca.png" alt="Michael Tilson Thomas" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/sean+ca.png" alt="Sean Carroll" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/frank+ca.png" alt="Frank Wilczek" class="w-full h-full object-cover"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/walter+isaacson+ca.png" alt="Walter Isaacson" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/MTT+ca.png" alt="Michael Tilson Thomas" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/sean+ca.png" alt="Sean Carroll" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/frank+ca.png" alt="Frank Wilczek" class="w-full h-full object-cover" loading="lazy"></div>
                     
                     <!-- Second row -->
-                    <div class="podcast-wall-item"><img src="images/podcast/julian+ca.png" alt="Julian" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/ray+ca.png" alt="Ray" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/bill+ca.png" alt="Bill" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/PABLO+CA.png" alt="Pablo" class="w-full h-full object-cover"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/julian+ca.png" alt="Julian" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/ray+ca.png" alt="Ray" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/bill+ca.png" alt="Bill" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/PABLO+CA.png" alt="Pablo" class="w-full h-full object-cover" loading="lazy"></div>
                     
                     <!-- Third row -->
-                    <div class="podcast-wall-item"><img src="images/podcast/krauss+ca.png" alt="Krauss" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/chris+ca.png" alt="Chris" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/mcmaster+ca.png" alt="McMaster" class="w-full h-full object-cover"></div>
-                    <div class="podcast-wall-item"><img src="images/podcast/Episode+Cover+Art+(1).png" alt="Episode Cover Art" class="w-full h-full object-cover"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/krauss+ca.png" alt="Krauss" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/chris+ca.png" alt="Chris" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/mcmaster+ca.png" alt="McMaster" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="podcast-wall-item"><img src="images/podcast/Episode+Cover+Art+(1).png" alt="Episode Cover Art" class="w-full h-full object-cover" loading="lazy"></div>
                 </div>
             </div>
         </div>
@@ -1451,34 +1472,44 @@
             <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Gallery</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 fade-in delay-1">
                 <div class="gallery-item">
-                    <img src="images/gallery/481998657_615590121397071_1198656928735756534_n.jpg" alt="Gallery image 1" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/481998657_615590121397071_1198656928735756534_n.jpg" alt="Gallery image 1" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/481668973_615590138063736_6624356745422015467_n.jpg" alt="Gallery image 2" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/481668973_615590138063736_6624356745422015467_n.jpg" alt="Gallery image 2" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/482031408_615590131397070_7856718215670323165_n.jpg" alt="Gallery image 3" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/482031408_615590131397070_7856718215670323165_n.jpg" alt="Gallery image 3" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                  <div class="gallery-item">
-                    <img src="images/gallery/206541753_10219720026374273_377406856488639313_n.jpg" alt="Gallery image 4" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/206541753_10219720026374273_377406856488639313_n.jpg" alt="Gallery image 4" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/64486201_10200829169429118_4085720539493040128_n.jpg" alt="Gallery image 5" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/64486201_10200829169429118_4085720539493040128_n.jpg" alt="Gallery image 5" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/310005208_10221309027059464_1991530002871544309_n.jpg" alt="Gallery image 6" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/310005208_10221309027059464_1991530002871544309_n.jpg" alt="Gallery image 6" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/473365961_18483271951003917_4929744147105892318_n.jpg" alt="Gallery image 7" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/473365961_18483271951003917_4929744147105892318_n.jpg" alt="Gallery image 7" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/IMG_2492.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/IMG_2492.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/IMG_9104.jpg" alt="Gallery image 9" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/IMG_9104.jpg" alt="Gallery image 9" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery/IMG_9105.jpg" alt="Gallery image 10" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105">
+                    <!-- Gallery section images - Lazy load all -->
+                    <img src="images/gallery/IMG_9105.jpg" alt="Gallery image 10" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1565,7 +1596,8 @@
     <!-- Footer -->
     <footer class="relative w-full text-white">
         <!-- Image as content, spanning full width -->
-        <img src="images/gallery/Lelchuk_15.jpeg" alt="Footer background image" class="block w-full h-auto">
+        <!-- Footer image - Lazy load -->
+        <img src="images/gallery/Lelchuk_15.jpeg" alt="Footer background image" class="block w-full h-auto" loading="lazy">
         
         <!-- Text overlay at the bottom -->
         <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 via-black/50 to-transparent">
@@ -1948,20 +1980,52 @@
             }
         });
 
-        // Preloader Fade Out
-        window.addEventListener('load', () => {
+        // Improved Preloader Management
+        document.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
-            if (preloader) {
-                // Wait a tiny bit after load event fires to ensure rendering
-                setTimeout(() => {
+            
+            // Function to hide preloader
+            function hidePreloader() {
+                if (preloader && !preloader.classList.contains('hidden')) {
                     preloader.classList.add('hidden');
                     
-                    // Optional: remove from DOM after transition
-                    // preloader.addEventListener('transitionend', () => {
-                    //     preloader.remove();
-                    // });
-                }, 800); // Increased delay in ms
+                    // Remove from DOM after transition completes
+                    preloader.addEventListener('transitionend', function(e) {
+                        if (e.propertyName === 'opacity') {
+                            preloader.remove();
+                        }
+                    }, { once: true });
+                }
             }
+            
+            // Set a minimum display time for better UX
+            const minDisplayTime = 600; // ms
+            const startTime = Date.now();
+            
+            // Option 1: DOM Content Loaded - faster than waiting for all resources
+            const elapsedTime = Date.now() - startTime;
+            if (elapsedTime < minDisplayTime) {
+                // If DOM loaded quickly, wait until minimum display time
+                setTimeout(hidePreloader, minDisplayTime - elapsedTime);
+            } else {
+                // If loading took longer, hide immediately
+                hidePreloader();
+            }
+            
+            // Option 2: Fallback - also listen for window load as backup
+            window.addEventListener('load', () => {
+                // Only handle if preloader still exists
+                if (preloader && !preloader.classList.contains('hidden')) {
+                    hidePreloader();
+                }
+            });
+            
+            // Option 3: Force hiding after a timeout (worst case scenario)
+            setTimeout(() => {
+                if (preloader && !preloader.classList.contains('hidden')) {
+                    hidePreloader();
+                }
+            }, 3000); // Force hide after 3 seconds maximum
         });
 
     </script>
