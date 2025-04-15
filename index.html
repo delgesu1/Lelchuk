@@ -1025,13 +1025,14 @@
             align-items: center;
             z-index: 10000; /* Ensure it's on top */
             opacity: 1;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Removed delay for faster transition */
+            transition: opacity 0.4s ease-out; /* Transition only opacity */
+            visibility: visible;
         }
 
         #preloader.hidden {
             opacity: 0;
             pointer-events: none; /* Disable interaction when hidden */
-            visibility: hidden; /* Added to completely hide the preloader once faded out */
+            /* visibility is set by JS after transition completes */
         }
 
         .loader-container {
@@ -1501,7 +1502,7 @@
                 </div>
                 <div class="gallery-item">
                     <!-- Gallery section images - Lazy load all -->
-                    <img src="images/gallery/IMG_2492.jpg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
+                    <img src="images/gallery/IMG_2492.jpeg" alt="Gallery image 8" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
                     <!-- Gallery section images - Lazy load all -->
@@ -1980,53 +1981,50 @@
             }
         });
 
-        // Improved Preloader Management
+        // Fixed-time Preloader Management
         document.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
             
-            // Function to hide preloader
+            // Function to hide preloader with proper fade transition
             function hidePreloader() {
                 if (preloader && !preloader.classList.contains('hidden')) {
+                    // Force a reflow to ensure the transition works
+                    preloader.offsetHeight;
+                    
+                    // Add the hidden class (sets opacity: 0)
                     preloader.classList.add('hidden');
                     
-                    // Remove from DOM after transition completes
+                    // After transition completes, set visibility to hidden and remove
                     preloader.addEventListener('transitionend', function(e) {
                         if (e.propertyName === 'opacity') {
-                            preloader.remove();
+                            // Set visibility to hidden after fade out completes
+                            preloader.style.visibility = 'hidden';
+                            
+                            // Optionally remove from DOM (can comment this out if it causes issues)
+                            // preloader.remove();
                         }
                     }, { once: true });
                 }
             }
             
-            // Set a minimum display time for better UX
-            const minDisplayTime = 1500; // Increased to 1.5 seconds so it's visible to users
-            const startTime = Date.now();
+            // Always show preloader for exactly 1600ms
+            // regardless of how quickly the page loads
+            setTimeout(hidePreloader, 1600);
             
-            // Option 1: DOM Content Loaded - faster than waiting for all resources
-            const elapsedTime = Date.now() - startTime;
-            if (elapsedTime < minDisplayTime) {
-                // If DOM loaded quickly, wait until minimum display time
-                console.log('Preloader will be visible for', minDisplayTime - elapsedTime, 'ms');
-                setTimeout(hidePreloader, minDisplayTime - elapsedTime);
-            } else {
-                // If loading took longer, hide immediately
-                hidePreloader();
-            }
-            
-            // Option 2: Fallback - also listen for window load as backup
-            window.addEventListener('load', () => {
-                // Only handle if preloader still exists
-                if (preloader && !preloader.classList.contains('hidden')) {
-                    hidePreloader();
-                }
-            });
-            
-            // Option 3: Force hiding after a timeout (worst case scenario)
+            // Fallback - force hide after 4 seconds in case something goes wrong
             setTimeout(() => {
                 if (preloader && !preloader.classList.contains('hidden')) {
+                    console.log('Fallback: forcing preloader to hide after timeout');
                     hidePreloader();
+                    
+                    // In case transition doesn't fire, force visibility hidden after a small delay
+                    setTimeout(() => {
+                        if (preloader) {
+                            preloader.style.visibility = 'hidden';
+                        }
+                    }, 500);
                 }
-            }, 3000); // Force hide after 3 seconds maximum
+            }, 4000);
         });
 
     </script>
