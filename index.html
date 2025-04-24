@@ -603,7 +603,6 @@
         @media (max-width: 767px) {
             .hero-image {
                 background-position: center center; /* Changed from 80% center */
-                background-attachment: scroll;
                 position: relative;
                 background-size: cover; /* Explicitly set */
             }
@@ -1090,6 +1089,15 @@
 
         /* End Preloader Styles */
 
+        @media (pointer: coarse) {
+            .cursor-dot,
+            .cursor-outline {
+                display: none;
+            }
+            .hero-image {
+                background-attachment: scroll; /* Add this */
+            }
+        }
     </style>
 </head>
 <body class="relative">
@@ -2031,6 +2039,9 @@
             .cursor-dot,
             .cursor-outline {
                 display: none;
+            }
+            .hero-image {
+                background-attachment: scroll; /* Add this */
             }
         }
     </style>
