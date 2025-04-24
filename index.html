@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <!-- Preload critical hero image -->
-    <link rel="preload" href="images/lelchuk small.jpg" as="image" media="(min-width: 768px)">
+    <link rel="preload" href="images/lelchuk-hero.jpg" as="image" media="(min-width: 768px)">
     <link rel="preload" href="images/LelchukLogo.png" as="image">
     <link rel="preload" href="images/LelchukLogoSmall.png" as="image">
     <link rel="preload" href="images/f hole.png" as="image">
@@ -58,7 +58,7 @@
         }
         
         .hero-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('images/lelchuk small.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url('images/lelchuk-hero.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -602,9 +602,10 @@
 
         @media (max-width: 767px) {
             .hero-image {
-                background-position: 80% center;
+                background-position: center center; /* Changed from 80% center */
                 background-attachment: scroll;
                 position: relative;
+                background-size: cover; /* Explicitly set */
             }
             
             .hero-image::after {
@@ -698,11 +699,8 @@
                 text-transform: uppercase !important;
             }
             
-            .cursor-dot,
-            .cursor-outline {
-                display: none;
-            }
-
+            /* Remove cursor hiding from mobile-only rule */
+            
             /* Make mobile nav transparent initially */
             #main-nav:not(.nav-scrolled) {
                 background-color: transparent;
@@ -1174,7 +1172,6 @@
     
     <!-- About Section -->
     <section id="about" class="pt-2 pb-6 px-8 relative">
-        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0b800d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80'); opacity: 0.05;"></div>
         <div class="container mx-auto max-w-6xl">
             <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in"></h2>
             <div>
@@ -1223,7 +1220,7 @@
                 <a href="https://castletonmusic.org/" target="_blank" rel="noopener noreferrer" class="group block bg-[--primary] bg-opacity-60 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-accent/20 hover:shadow-xl hover:-translate-y-1 border border-transparent hover:border-accent/30">
                     <div class="overflow-hidden">
                         <!-- Activities section images - add lazy loading -->
-                        <img src="images/gallery/IMG_9105.jpg" alt="Castleton Chamber Players" class="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <img src="images/gallery/IMG_9105.jpeg" alt="Castleton Chamber Players" class="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105" loading="lazy">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl lg:text-2xl font-semibold mb-2 text-secondary group-hover:text-accent transition-colors duration-300" style="font-family: 'Playfair Display', serif;">Castleton Chamber Players</h3>
@@ -1486,7 +1483,7 @@
                 </div>
                  <div class="gallery-item">
                     <!-- Gallery section images - Lazy load all -->
-                    <img src="images/gallery/206541753_10219720026374273_377406856488639313_n.jpg" alt="Gallery image 4" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
+                    <img src="images/gallery/206541753_10219720026374273_377406856488639313_n.jpeg" alt="Gallery image 4" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
                     <!-- Gallery section images - Lazy load all -->
@@ -1506,11 +1503,11 @@
                 </div>
                 <div class="gallery-item">
                     <!-- Gallery section images - Lazy load all -->
-                    <img src="images/gallery/IMG_9104.jpg" alt="Gallery image 9" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
+                    <img src="images/gallery/IMG_9104" alt="Gallery image 9" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
                 <div class="gallery-item">
                     <!-- Gallery section images - Lazy load all -->
-                    <img src="images/gallery/IMG_9105.jpg" alt="Gallery image 10" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
+                    <img src="images/gallery/IMG_9105.jpeg" alt="Gallery image 10" class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1528,7 +1525,6 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-28 px-8 bg-black bg-opacity-70 relative">
-        <div class="absolute inset-0 -z-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0b800d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80'); opacity: 0.05;"></div>
         <div class="container mx-auto max-w-4xl">
             <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Contact</h2>
             
@@ -2028,5 +2024,15 @@
         });
 
     </script>
+    
+    <!-- New CSS to hide cursor on touch devices -->
+    <style>
+        @media (pointer: coarse) {
+            .cursor-dot,
+            .cursor-outline {
+                display: none;
+            }
+        }
+    </style>
 </body>
 </html>
