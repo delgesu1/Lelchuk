@@ -496,11 +496,27 @@
             border-bottom: 1px solid rgba(193, 154, 107, 0.2);
             padding-bottom: 2rem;
             margin-bottom: 2rem;
+            position: relative;
+            cursor: pointer;
         }
 
         .publication-card:hover {
             transform: translateY(-5px);
             border-bottom-color: var(--accent);
+        }
+
+        .publication-card .main-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .publication-card .read-more-btn {
+            position: relative;
+            z-index: 2;
         }
 
         .publication-tag {
@@ -1268,6 +1284,7 @@
 
                     <!-- David Gergen Article -->
                     <div class="publication-card fade-in" data-category="quillette">
+                        <a href="https://quillette.com/2025/07/31/repairing-americas-broken-civic-spirit-lessons-from-david-gergen-1942-2025/" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about David Gergen"></a>
                         <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
                                 <!-- Publications section images - add lazy loading -->
@@ -1288,6 +1305,7 @@
 
                     <!-- Tom Fitzmorris Article -->
                     <div class="publication-card fade-in" data-category="quillette">
+                        <a href="https://quillette.com/2025/04/03/remembering-tom-fitzmorris-tireless-champion-of-new-orleans-unique-culinary-culture-2/" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Tom Fitzmorris"></a>
                         <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
                                 <!-- Publications section images - add lazy loading -->
@@ -1307,6 +1325,7 @@
 
                     <!-- Puccini -->
                     <div class="publication-card fade-in" data-category="bulwark">
+                        <a href="https://www.thebulwark.com/p/you-need-more-puccini-in-your-life-100-years-after-death" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Puccini"></a>
                         <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
                                 <!-- Publications section images - add lazy loading -->
@@ -1326,6 +1345,7 @@
 
                     <!-- Bernstein -->
                     <div class="publication-card fade-in" data-category="quillette">
+                         <a href="https://quillette.com/2024/01/16/leonard-bernstein-deserved-better-than-maestro/" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Leonard Bernstein"></a>
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
                                 <!-- Publications section images - add lazy loading -->
@@ -1345,6 +1365,7 @@
 
                     <!-- Art for Art's Sake -->
                     <div class="publication-card fade-in" data-category="bulwark">
+                         <a href="https://www.thebulwark.com/p/a-defense-of-art-for-arts-sake" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Art for Art's Sake"></a>
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                             <div class="md:col-span-1 overflow-hidden rounded">
                                 <!-- Publications section images - add lazy loading -->
@@ -1364,6 +1385,7 @@
 
                     <!-- Restore Your Faith -->
                      <div class="publication-card fade-in" data-category="quillette">
+                         <a href="https://quillette.com/2022/01/08/want-to-restore-your-faith-in-humanity-visit-a-scientific-conference/" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about restoring faith in humanity"></a>
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
                                  <!-- Publications section images - add lazy loading -->
@@ -1383,6 +1405,7 @@
 
                     <!-- Aaron Copland -->
                      <div class="publication-card fade-in" data-category="forward">
+                         <a href="https://forward.com/culture/477961/on-his-121st-birthday-four-reasons-to-love-aaron-copland/" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Aaron Copland"></a>
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
                                  <!-- Publications section images - add lazy loading -->
@@ -1402,6 +1425,7 @@
 
                     <!-- Arnold Schoenberg -->
                      <div class="publication-card fade-in" data-category="forward">
+                         <a href="https://forward.com/culture/475409/how-arnold-schoenberg-changed-my-life-and-might-even-change-yours-too/" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Arnold Schoenberg"></a>
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
                                  <!-- Publications section images - add lazy loading -->
@@ -1421,6 +1445,7 @@
 
                     <!-- Beethoven at 250 -->
                      <div class="publication-card fade-in" data-category="bulwark">
+                         <a href="https://www.thebulwark.com/p/beethoven-at-250-four-masterpieces-to-celebrate-the-big-day" target="_blank" rel="noopener noreferrer" class="main-link" aria-label="Read article about Beethoven at 250"></a>
                          <div class="grid md:grid-cols-3 gap-8 items-center">
                              <div class="md:col-span-1 overflow-hidden rounded">
                                  <!-- Publications section images - add lazy loading -->
